@@ -14,6 +14,7 @@ class NotificationManager {
             this.container.id = 'toast-container';
             this.container.className = 'toast-container';
             this.container.setAttribute('aria-live', 'polite');
+            this.container.setAttribute('aria-relevant', 'additions');
             document.body.appendChild(this.container);
         } else {
             this.container = document.getElementById('toast-container');
@@ -31,7 +32,8 @@ class NotificationManager {
 
         const toast = document.createElement('div');
         toast.className = `toast toast-${type}`;
-        toast.setAttribute('role', 'alert');
+        toast.setAttribute('role', type === 'error' ? 'alert' : 'status');
+        toast.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
 
         const icons = {
             success: '✓',
@@ -42,6 +44,7 @@ class NotificationManager {
 
         toast.innerHTML = `
             <span class="toast-icon">${icons[type] || 'ℹ'}</span>
+                        <span class="toast-icon" aria-hidden="true">${icons[type] || 'ℹ'}</span>
             <div class="toast-content">
                 <span class="toast-message">${message}</span>
             </div>

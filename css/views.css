@@ -250,11 +250,15 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    min-width: 0;
 }
 
 .screening-question {
     display: flex;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 
 .radio-toggle-group {
@@ -272,7 +276,15 @@
 }
 
 .radio-chip input[type="radio"] {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 .radio-chip span {
@@ -289,6 +301,11 @@
     background-color: white;
     color: var(--text-main);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.radio-chip input[type="radio"]:focus-visible + span {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 3px;
 }
 
 .radio-chip.danger input[type="radio"]:checked + span {
@@ -517,9 +534,26 @@
         align-items: stretch;
     }
 
+    .search-input-wrapper {
+        width: 100%;
+        min-width: 0;
+    }
+
     .filter-controls {
+        width: 100%;
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .filter-group {
+        width: 100%;
+        min-width: 0;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .screening-grid {
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .form-actions-bar {
@@ -533,5 +567,10 @@
 
     .form-actions-right .btn {
         width: 100%;
+    }
+
+    .header-controls {
+        flex-wrap: wrap;
+        justify-content: flex-end;
     }
 }

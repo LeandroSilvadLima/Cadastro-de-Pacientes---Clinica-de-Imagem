@@ -27,7 +27,8 @@ export function renderPatientList() {
         <div class="card p-3 mb-4">
             <div class="filter-toolbar">
                 <div class="search-input-wrapper">
-                    <span class="search-icon">🔍</span>
+                    <span class="search-icon" aria-hidden="true">🔍</span>
+                    <label for="search-input" class="visually-hidden">Buscar pacientes</label>
                     <input 
                         type="text" 
                         id="search-input" 
@@ -68,7 +69,7 @@ export function renderPatientList() {
             </div>
 
             <div class="list-meta-info mt-2">
-                <span id="results-count" class="text-sm text-muted">
+                <span id="results-count" class="text-sm text-muted" role="status" aria-live="polite" aria-atomic="true">
                     Exibindo <strong>${patients.length}</strong> paciente(s)
                 </span>
             </div>
@@ -77,16 +78,17 @@ export function renderPatientList() {
         <!-- Tabela de Pacientes -->
         <div class="card">
             <div class="card-body p-0">
-                <div class="table-responsive">
+                <div class="table-responsive" role="region" aria-label="Tabela de pacientes" tabindex="0">
                     <table class="data-table" id="patients-table">
+                        <caption class="visually-hidden">Pacientes cadastrados, exames, datas, alertas de triagem e ações</caption>
                         <thead>
                             <tr>
-                                <th>Paciente / Identificação</th>
-                                <th>Contato</th>
-                                <th>Exame / Convênio</th>
-                                <th>Data Agendada</th>
-                                <th>Triagem de Risco</th>
-                                <th class="text-right">Ações</th>
+                                <th scope="col">Paciente / Identificação</th>
+                                <th scope="col">Contato</th>
+                                <th scope="col">Exame / Convênio</th>
+                                <th scope="col">Data Agendada</th>
+                                <th scope="col">Triagem de Risco</th>
+                                <th scope="col" class="text-right">Ações</th>
                             </tr>
                         </thead>
                         <tbody id="patients-tbody">
@@ -153,7 +155,7 @@ export function attachPatientListEvents(container) {
                     <td colspan="6" class="text-center py-5">
                         <div class="empty-state">
                             <span class="empty-state-icon">📋</span>
-                            <h4>Nenhum paciente encontrado</h4>
+                            <h2>Nenhum paciente encontrado</h2>
                             <p class="text-muted text-sm mt-1">Ajuste os filtros de busca ou realize um novo cadastro.</p>
                             <a href="#/cadastro" class="btn btn-sm btn-primary mt-3">Cadastrar Novo Paciente</a>
                         </div>
@@ -166,6 +168,7 @@ export function attachPatientListEvents(container) {
         targetElement.innerHTML = list.map(p => `
             <tr data-patient-id="${p.id}">
                 <td>
+                <th scope="row">
                     <div class="patient-cell-name">
                         <span class="font-medium text-dark">${escapeHTML(p.fullName)}</span>
                         <div class="text-xs text-muted">
@@ -173,7 +176,7 @@ export function attachPatientListEvents(container) {
                             <span>${calculateAge(p.birthDate)} anos</span>
                         </div>
                     </div>
-                </td>
+                </th>
                 <td>
                     <div class="text-sm">${p.phone}</div>
                     <div class="text-xs text-muted">${escapeHTML(p.email)}</div>

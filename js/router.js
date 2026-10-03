@@ -40,7 +40,7 @@ class Router {
         window.addEventListener('hashchange', () => this.handleRoute());
 
         // Carrega rota inicial
-        if (!window.location.hash) {
+        if (!window.location.hash || !window.location.hash.startsWith('#/')) {
             window.location.hash = '#/dashboard';
         } else {
             this.handleRoute();
@@ -52,6 +52,10 @@ class Router {
      */
     handleRoute() {
         const hash = window.location.hash || '#/dashboard';
+        if (!hash.startsWith('#/')) {
+            if (hash === '#app') this.appContainer?.focus({ preventScroll: true });
+            return;
+        }
 
         // Atualiza estilo ativo nos links de navegação
         this.updateActiveNav(hash);
@@ -92,8 +96,15 @@ class Router {
                 attachFn(this.appContainer);
             }
 
-            // Rola para o topo suavemente
-            window.scrollTo({ top: 0, behavior: 'instant' });
+            const heading = this.appContainer.querySelector('h1, h2');
+            if (heading) {
+                heading.tabIndex = -1;
+                heading.focus({ preventScroll: true });
+            } else {
+                this.appContainer.focus({ preventScroll: true });
+            }
+
+            window.scrollTo({ top: 0, behavior: 'auto' });
 
             // Animação de entrada
             this.appContainer.classList.remove('view-fade-out');
@@ -112,10 +123,13 @@ class Router {
     updateActiveNav(currentHash) {
         document.querySelectorAll('.nav-link').forEach(link => {
             const href = link.getAttribute('href');
-            if (href === currentHash || (currentHash.startsWith('#/editar') && href === '#/pacientes')) {
+            const isCurrent = href === currentHash || (currentHash.startsWith('#/editar') && href === '#/pacientes');
+            if (isCurrent) {
                 link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
             } else {
                 link.classList.remove('active');
+                link.removeAttribute('aria-current');
             }
         });
     }

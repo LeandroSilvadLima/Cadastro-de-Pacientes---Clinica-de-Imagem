@@ -5,39 +5,41 @@
 
 :root {
     /* Cores Principais - Tema Médico Sofisticado (Ciano / Azul Safira / Esmeralda) */
-    --primary: #0284c7;           /* Sky Blue 600 */
-    --primary-hover: #0369a1;     /* Sky Blue 700 */
+    --primary: #075985;           /* Sky Blue 800: AA contrast on white */
+    --primary-hover: #0c4a6e;     /* Sky Blue 900 */
     --primary-light: #e0f2fe;     /* Sky Blue 100 */
-    --primary-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-    --brand-teal: #0d9488;        /* Teal 600 */
+    --primary-gradient: linear-gradient(135deg, #075985 0%, #0c4a6e 100%);
+    --brand-teal: #0f766e;        /* Teal 700 */
 
     /* Cores Neutras e Superfícies */
     --bg-page: #f8fafc;           /* Slate 50 */
     --bg-surface: #ffffff;
     --bg-subtle: #f1f5f9;         /* Slate 100 */
-    --border-color: #e2e8f0;      /* Slate 200 */
-    --border-focus: #38bdf8;      /* Sky Blue 400 */
+    --border-color: #cbd5e1;      /* Slate 300 */
+    --control-border: #64748b;    /* Slate 500: visible control boundaries */
+    --border-focus: #075985;
+    --focus-ring: #9a3412;
 
     /* Tipografia e Textos */
     --text-main: #0f172a;         /* Slate 900 */
-    --text-muted: #64748b;        /* Slate 500 */
-    --text-light: #94a3b8;        /* Slate 400 */
+    --text-muted: #475569;        /* Slate 600 */
+    --text-light: #475569;
     --text-inverse: #ffffff;
 
     /* Cores Semânticas / Alertas Médicos */
-    --success: #10b981;           /* Emerald 500 */
+    --success: #047857;           /* Emerald 700 */
     --success-light: #d1fae5;
     --success-text: #065f46;
 
-    --warning: #f59e0b;           /* Amber 500 */
+    --warning: #854d0e;           /* Amber 800 */
     --warning-light: #fef3c7;
-    --warning-text: #92400e;
+    --warning-text: #78350f;
 
-    --danger: #ef4444;            /* Red 500 */
+    --danger: #b91c1c;            /* Red 700 */
     --danger-light: #fee2e2;
     --danger-text: #991b1b;
 
-    --info: #3b82f6;              /* Blue 500 */
+    --info: #1d4ed8;              /* Blue 700 */
     --info-light: #dbeafe;
     --info-text: #1e40af;
 
@@ -60,4 +62,37 @@
     /* Dimensões */
     --header-height: 70px;
     --container-max-width: 1240px;
+}
+
+:root[data-contrast="high"] {
+    --primary: #003b5c;
+    --primary-hover: #002b45;
+    --primary-light: #ffffff;
+    --primary-gradient: linear-gradient(135deg, #003b5c 0%, #002b45 100%);
+    --bg-page: #ffffff;
+    --bg-surface: #ffffff;
+    --bg-subtle: #f0f0f0;
+    --border-color: #000000;
+    --control-border: #000000;
+    --border-focus: #000000;
+    --focus-ring: #000000;
+    --text-main: #000000;
+    --text-muted: #1f2937;
+    --text-light: #111827;
+    --success: #005a30;
+    --success-light: #ffffff;
+    --success-text: #005a30;
+    --warning: #663c00;
+    --warning-light: #ffffff;
+    --warning-text: #663c00;
+    --danger: #9a0000;
+    --danger-light: #ffffff;
+    --danger-text: #9a0000;
+    --info: #003ca6;
+    --info-light: #ffffff;
+    --info-text: #003ca6;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+    --shadow-card: none;
 }

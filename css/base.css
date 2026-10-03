@@ -16,6 +16,40 @@ html {
     -webkit-font-smoothing: antialiased;
 }
 
+.visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 1100;
+    padding: 0.75rem 1rem;
+    background: var(--bg-surface);
+    color: var(--text-main);
+    border: 2px solid var(--control-border);
+    border-radius: var(--radius-sm);
+    transform: translateY(-180%);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 3px;
+}
+
 body {
     font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background-color: var(--bg-page);
@@ -61,6 +95,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .brand-container {
@@ -151,6 +191,7 @@ body {
     width: 100%;
     margin: 0 auto;
     padding: 2rem 1.5rem 3.5rem;
+    scroll-margin-top: calc(var(--header-height) + 1rem);
 }
 
 /* Transições Fluidas de SPA */
@@ -245,9 +286,55 @@ body {
         padding: 0.75rem 1rem;
     }
 
+    .header-controls {
+        gap: 0.5rem;
+    }
+
     .footer-inner {
         flex-direction: column;
         gap: 0.5rem;
         text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .header-inner {
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+    }
+
+    .brand-tagline,
+    .contrast-toggle > span:last-child {
+        display: none;
+    }
+
+    .contrast-toggle {
+        width: 2.75rem;
+        padding: 0.5rem;
+    }
+}
+
+@media (forced-colors: active) {
+    :focus-visible {
+        outline: 3px solid Highlight;
+        box-shadow: none !important;
+    }
+
+    .btn,
+    .nav-link,
+    .form-control,
+    .contrast-toggle {
+        border: 1px solid ButtonText;
     }
 }

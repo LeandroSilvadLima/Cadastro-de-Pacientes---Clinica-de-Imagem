@@ -19,6 +19,7 @@
     transition: all var(--transition-fast);
     line-height: 1.2;
     white-space: nowrap;
+    min-height: 2.75rem;
 }
 
 .btn:active {
@@ -38,7 +39,7 @@
 .btn-secondary {
     background-color: var(--bg-subtle);
     color: var(--text-main);
-    border-color: var(--border-color);
+    border-color: var(--control-border);
 }
 .btn-secondary:hover {
     background-color: #e2e8f0;
@@ -48,7 +49,7 @@
 .btn-outline {
     background-color: transparent;
     color: var(--text-main);
-    border-color: var(--border-color);
+    border-color: var(--control-border);
 }
 .btn-outline:hover {
     background-color: var(--bg-subtle);
@@ -66,7 +67,7 @@
 .btn-danger-outline {
     background-color: transparent;
     color: var(--danger);
-    border-color: #fca5a5;
+    border-color: var(--danger);
 }
 .btn-danger-outline:hover {
     background-color: var(--danger-light);
@@ -77,6 +78,29 @@
     padding: 0.4rem 0.75rem;
     font-size: 0.8rem;
     border-radius: var(--radius-sm);
+    min-height: 2.5rem;
+}
+
+.contrast-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--control-border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-surface);
+    color: var(--text-main);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.contrast-toggle[aria-pressed="true"] {
+    background: var(--text-main);
+    color: var(--bg-surface);
 }
 
 .btn-block {
@@ -135,18 +159,18 @@
     font-family: inherit;
     font-size: 0.95rem;
     padding: 0.65rem 0.9rem;
-    border: 1.5px solid var(--border-color);
+    border: 1.5px solid var(--control-border);
     border-radius: var(--radius-md);
     background-color: var(--bg-surface);
     color: var(--text-main);
-    outline: none;
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
     width: 100%;
+    min-height: 2.75rem;
 }
 
 .form-control:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--border-focus) 25%, transparent);
 }
 
 .form-control-sm {
@@ -260,12 +284,29 @@
     vertical-align: middle;
 }
 
+.data-table tbody th[scope="row"] {
+    padding: 1rem 1.25rem;
+    background: transparent;
+    color: var(--text-main);
+    font: inherit;
+    font-weight: 400;
+    text-align: left;
+    text-transform: none;
+    letter-spacing: normal;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
 .data-table tbody tr {
     transition: background-color var(--transition-fast);
 }
 
 .data-table tbody tr:hover {
     background-color: #f8fafc;
+}
+
+.table-responsive:focus-visible {
+    outline-offset: 2px;
 }
 
 .table-actions {
@@ -370,6 +411,59 @@
 
 .toast-info { border-left: 5px solid var(--info); }
 .toast-info .toast-icon { color: var(--info); }
+
+:root[data-contrast="high"] .card,
+:root[data-contrast="high"] .metric-card,
+:root[data-contrast="high"] .screening-box,
+:root[data-contrast="high"] .modal-card,
+:root[data-contrast="high"] .toast {
+    border: 2px solid #000000;
+    box-shadow: none;
+}
+
+:root[data-contrast="high"] .badge,
+:root[data-contrast="high"] .nav-link.active,
+:root[data-contrast="high"] .form-control {
+    border: 1px solid currentColor;
+}
+
+:root[data-contrast="high"] .data-table th,
+:root[data-contrast="high"] .section-header,
+:root[data-contrast="high"] .modal-footer {
+    background: #ffffff;
+}
+
+:root[data-contrast="high"] .btn-secondary,
+:root[data-contrast="high"] .btn-outline,
+:root[data-contrast="high"] .btn-danger-outline,
+:root[data-contrast="high"] .contrast-toggle,
+:root[data-contrast="high"] .radio-toggle-group,
+:root[data-contrast="high"] .progress-track {
+    border: 1px solid currentColor;
+}
+
+:root[data-contrast="high"] .radio-toggle-group,
+:root[data-contrast="high"] .radio-chip span,
+:root[data-contrast="high"] .safety-item {
+    background: #ffffff;
+}
+
+:root[data-contrast="high"] .safety-item.safe,
+:root[data-contrast="high"] .safety-item.danger,
+:root[data-contrast="high"] .safety-item.warning,
+:root[data-contrast="high"] .safety-item.info {
+    border: 1px solid currentColor;
+}
+
+:root[data-contrast="high"] :focus-visible {
+    outline-color: #000000;
+    box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #000000;
+}
+
+:root[data-contrast="high"] .radio-chip input[type="radio"]:focus-visible + span {
+    outline-color: #000000;
+    box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #000000;
+}
 
 /* Sistema de Janelas Modais */
 .modal-overlay {

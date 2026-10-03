@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/views.css">
 </head>
 <body>
+    <a class="skip-link" href="#app">Pular para o conteúdo principal</a>
     <!-- Cabeçalho Principal e Navegação SPA -->
     <header class="app-header">
         <div class="header-inner">
@@ -30,31 +31,38 @@
                 </div>
             </a>
 
-            <!-- Botão Menu Mobile -->
-            <button class="menu-toggle" id="menu-toggle" aria-label="Alternar menu de navegação" aria-expanded="false">
-                ☰
-            </button>
+            <div class="header-controls">
+                <!-- Botão Menu Mobile -->
+                <button class="menu-toggle" id="menu-toggle" aria-label="Alternar menu de navegação" aria-controls="main-nav" aria-expanded="false">
+                    <span aria-hidden="true">☰</span>
+                </button>
 
-            <!-- Links de Navegação da SPA -->
-            <nav class="main-nav" id="main-nav" aria-label="Navegação Principal">
-                <a href="#/dashboard" class="nav-link" id="nav-dashboard">
-                    <span>📊</span>
+                <!-- Links de Navegação da SPA -->
+                <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
+                    <a href="#/dashboard" class="nav-link" id="nav-dashboard">
+                    <span aria-hidden="true">📊</span>
                     <span>Painel</span>
-                </a>
-                <a href="#/pacientes" class="nav-link" id="nav-pacientes">
-                    <span>👥</span>
+                    </a>
+                    <a href="#/pacientes" class="nav-link" id="nav-pacientes">
+                    <span aria-hidden="true">👥</span>
                     <span>Pacientes</span>
-                </a>
-                <a href="#/cadastro" class="nav-link" id="nav-cadastro">
-                    <span>✚</span>
+                    </a>
+                    <a href="#/cadastro" class="nav-link" id="nav-cadastro">
+                    <span aria-hidden="true">✚</span>
                     <span>Novo Cadastro</span>
-                </a>
-            </nav>
+                    </a>
+                </nav>
+
+                <button class="contrast-toggle" id="contrast-toggle" type="button" aria-label="Alternar modo de alto contraste" title="Alternar modo de alto contraste" aria-pressed="false">
+                    <span aria-hidden="true">◐</span>
+                    <span>Alto contraste</span>
+                </button>
+            </div>
         </div>
     </header>
 
     <!-- Container Dinâmico da SPA -->
-    <main class="app-main" id="app" role="main" aria-live="polite">
+    <main class="app-main" id="app" tabindex="-1">
         <!-- O conteúdo das views (Dashboard, Cadastro, Lista) é injetado aqui via JavaScript -->
     </main>
 

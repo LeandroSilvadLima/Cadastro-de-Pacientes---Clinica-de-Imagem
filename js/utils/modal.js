@@ -5,6 +5,7 @@
 class ModalManager {
     constructor() {
         this.overlay = null;
+        this.previousFocus = null;
         this.init();
     }
 
@@ -14,12 +15,12 @@ class ModalManager {
             this.overlay.id = 'modal-overlay';
             this.overlay.className = 'modal-overlay hidden';
             this.overlay.innerHTML = `
-                <div class="modal-card" role="dialog" aria-modal="true">
+                <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
                     <header class="modal-header">
                         <h3 class="modal-title" id="modal-title">Título</h3>
                         <button class="modal-close-btn" id="modal-close-btn" aria-label="Fechar">&times;</button>
                     </header>
-                    <div class="modal-body" id="modal-body"></div>
+                    <div class="modal-body" id="modal-body" role="region" aria-label="Conteúdo do diálogo" tabindex="0"></div>
                     <footer class="modal-footer" id="modal-footer"></footer>
                 </div>
             `;
@@ -31,8 +32,16 @@ class ModalManager {
             });
 
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !this.overlay.classList.contains('hidden')) {
+                if (this.overlay.classList.contains('hidden')) return;
+
+                if (e.key === 'Escape') {
+                    e.preventDefault();
                     this.close();
+                    return;
+                }
+
+                if (e.key === 'Tab') {
+                    this.trapFocus(e);
                 }
             });
         } else {
@@ -46,6 +55,7 @@ class ModalManager {
      */
     open({ title, content, footerButtons = [] }) {
         if (!this.overlay) this.init();
+        this.previousFocus = document.activeElement;
 
         const titleEl = this.overlay.querySelector('#modal-title');
         const bodyEl = this.overlay.querySelector('#modal-body');
@@ -81,6 +91,32 @@ class ModalManager {
 
         this.overlay.classList.remove('hidden');
         document.body.classList.add('modal-open');
+        const firstFocusable = this.getFocusableElements()[0] || this.overlay.querySelector('.modal-card');
+        firstFocusable.focus();
+    }
+
+    getFocusableElements() {
+        return [...this.overlay.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+            .filter(element => element.getClientRects().length > 0);
+    }
+
+    trapFocus(event) {
+        const focusable = this.getFocusableElements();
+        if (focusable.length === 0) {
+            event.preventDefault();
+            this.overlay.querySelector('.modal-card').focus();
+            return;
+        }
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && (document.activeElement === first || !this.overlay.contains(document.activeElement))) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && (document.activeElement === last || !this.overlay.contains(document.activeElement))) {
+            event.preventDefault();
+            first.focus();
+        }
     }
 
     /**
@@ -113,6 +149,10 @@ class ModalManager {
         if (this.overlay) {
             this.overlay.classList.add('hidden');
             document.body.classList.remove('modal-open');
+            if (this.previousFocus?.isConnected) {
+                this.previousFocus.focus({ preventScroll: true });
+            }
+            this.previousFocus = null;
         }
     }
 }

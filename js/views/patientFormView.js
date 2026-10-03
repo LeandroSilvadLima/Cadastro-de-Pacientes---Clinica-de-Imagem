@@ -82,7 +82,7 @@ export function renderPatientForm(patientId = null) {
         </div>
 
         <div class="form-container">
-            <form id="patient-form" novalidate autocomplete="off">
+            <form id="patient-form" novalidate>
                 <input type="hidden" id="patient-id" value="${data.id || ''}">
 
                 <!-- Seção 1: Identificação Pessoal -->
@@ -103,6 +103,7 @@ export function renderPatientForm(patientId = null) {
                                     id="fullName" 
                                     name="fullName" 
                                     class="form-control" 
+                                    autocomplete="name"
                                     placeholder="Ex: Ana Clara dos Santos"
                                     value="${escapeHTML(data.fullName)}"
                                     required
@@ -134,6 +135,8 @@ export function renderPatientForm(patientId = null) {
                                     id="birthDate" 
                                     name="birthDate" 
                                     class="form-control" 
+                                    aria-describedby="age-hint"
+                                    autocomplete="bday"
                                     value="${data.birthDate}"
                                     max="${new Date().toISOString().slice(0, 10)}"
                                     required
@@ -160,6 +163,7 @@ export function renderPatientForm(patientId = null) {
                                     id="phone" 
                                     name="phone" 
                                     class="form-control" 
+                                    autocomplete="tel"
                                     placeholder="(00) 00000-0000"
                                     maxlength="15"
                                     value="${data.phone}"
@@ -177,6 +181,7 @@ export function renderPatientForm(patientId = null) {
                                     id="email" 
                                     name="email" 
                                     class="form-control" 
+                                    autocomplete="email"
                                     placeholder="paciente@exemplo.com.br"
                                     value="${escapeHTML(data.email)}"
                                     required
@@ -206,6 +211,7 @@ export function renderPatientForm(patientId = null) {
                                         id="cep" 
                                         name="cep" 
                                         class="form-control" 
+                                        autocomplete="postal-code"
                                         placeholder="00000-000" 
                                         maxlength="9"
                                         value="${data.cep}"
@@ -226,6 +232,7 @@ export function renderPatientForm(patientId = null) {
                                     id="street" 
                                     name="street" 
                                     class="form-control" 
+                                    autocomplete="address-line1"
                                     placeholder="Ex: Rua das Flores"
                                     value="${escapeHTML(data.street)}"
                                     required
@@ -256,6 +263,7 @@ export function renderPatientForm(patientId = null) {
                                     id="complement" 
                                     name="complement" 
                                     class="form-control" 
+                                    autocomplete="address-line2"
                                     placeholder="Apto 101, Bloco 2"
                                     value="${escapeHTML(data.complement)}"
                                 >
@@ -268,6 +276,7 @@ export function renderPatientForm(patientId = null) {
                                     id="neighborhood" 
                                     name="neighborhood" 
                                     class="form-control" 
+                                    autocomplete="address-level3"
                                     placeholder="Centro"
                                     value="${escapeHTML(data.neighborhood)}"
                                     required
@@ -283,6 +292,7 @@ export function renderPatientForm(patientId = null) {
                                         id="city" 
                                         name="city" 
                                         class="form-control" 
+                                        autocomplete="address-level2"
                                         placeholder="São Paulo"
                                         value="${escapeHTML(data.city)}"
                                         required
@@ -296,6 +306,7 @@ export function renderPatientForm(patientId = null) {
                                         id="state" 
                                         name="state" 
                                         class="form-control text-uppercase" 
+                                        autocomplete="address-level1"
                                         placeholder="SP"
                                         maxlength="2"
                                         value="${escapeHTML(data.state)}"
@@ -431,11 +442,11 @@ export function renderPatientForm(patientId = null) {
                     </div>
                     <div class="card-body">
                         <div class="screening-grid">
-                            <div class="screening-box">
-                                <div class="screening-question">
+                            <fieldset class="screening-box">
+                                <legend class="screening-question">
                                     <strong>Marcapasso ou Próteses Metálicas?</strong>
-                                    <p class="text-xs text-muted">Risco crítico para campos de Ressonância Magnética</p>
-                                </div>
+                                    <span class="text-xs text-muted">Risco crítico para campos de Ressonância Magnética</span>
+                                </legend>
                                 <div class="radio-toggle-group">
                                     <label class="radio-chip">
                                         <input type="radio" name="hasPacemaker" value="nao" ${data.hasPacemaker !== 'sim' ? 'checked' : ''}>
@@ -446,13 +457,13 @@ export function renderPatientForm(patientId = null) {
                                         <span>SIM ⚠️</span>
                                     </label>
                                 </div>
-                            </div>
+                            </fieldset>
 
-                            <div class="screening-box">
-                                <div class="screening-question">
+                            <fieldset class="screening-box">
+                                <legend class="screening-question">
                                     <strong>Necessidade de Meio de Contraste?</strong>
-                                    <p class="text-xs text-muted">Iodo (TC) ou Gadolínio (RM)</p>
-                                </div>
+                                    <span class="text-xs text-muted">Iodo (TC) ou Gadolínio (RM)</span>
+                                </legend>
                                 <div class="radio-toggle-group">
                                     <label class="radio-chip">
                                         <input type="radio" name="needsContrast" value="nao" ${data.needsContrast !== 'sim' ? 'checked' : ''}>
@@ -463,13 +474,13 @@ export function renderPatientForm(patientId = null) {
                                         <span>SIM</span>
                                     </label>
                                 </div>
-                            </div>
+                            </fieldset>
 
-                            <div class="screening-box">
-                                <div class="screening-question">
+                            <fieldset class="screening-box">
+                                <legend class="screening-question">
                                     <strong>Histórico de Claustrofobia?</strong>
-                                    <p class="text-xs text-muted">Para suporte de equipe e acomodação</p>
-                                </div>
+                                    <span class="text-xs text-muted">Para suporte de equipe e acomodação</span>
+                                </legend>
                                 <div class="radio-toggle-group">
                                     <label class="radio-chip">
                                         <input type="radio" name="hasClaustrophobia" value="nao" ${data.hasClaustrophobia !== 'sim' ? 'checked' : ''}>
@@ -480,13 +491,13 @@ export function renderPatientForm(patientId = null) {
                                         <span>SIM</span>
                                     </label>
                                 </div>
-                            </div>
+                            </fieldset>
 
-                            <div class="screening-box">
-                                <div class="screening-question">
+                            <fieldset class="screening-box">
+                                <legend class="screening-question">
                                     <strong>Suspeita ou Confirmação de Gravidez?</strong>
-                                    <p class="text-xs text-muted">Contraindicação para radiação ionizante</p>
-                                </div>
+                                    <span class="text-xs text-muted">Contraindicação para radiação ionizante</span>
+                                </legend>
                                 <div class="radio-toggle-group">
                                     <label class="radio-chip">
                                         <input type="radio" name="isPregnant" value="nao" ${data.isPregnant !== 'sim' ? 'checked' : ''}>
@@ -497,7 +508,7 @@ export function renderPatientForm(patientId = null) {
                                         <span>SIM ⚠️</span>
                                     </label>
                                 </div>
-                            </div>
+                            </fieldset>
                         </div>
 
                         <div class="form-group mt-4">
@@ -541,6 +552,11 @@ export function renderPatientForm(patientId = null) {
 export function attachPatientFormEvents(container, patientId = null) {
     const form = container.querySelector('#patient-form');
     if (!form) return;
+
+    form.querySelectorAll('.feedback-msg').forEach(feedback => {
+        feedback.setAttribute('role', 'status');
+        feedback.setAttribute('aria-live', 'polite');
+    });
 
     const isEdit = Boolean(patientId);
 
@@ -745,9 +761,18 @@ export function attachPatientFormEvents(container, patientId = null) {
             form.reset();
             form.querySelectorAll('.is-invalid, .is-valid').forEach(el => {
                 el.classList.remove('is-invalid', 'is-valid');
+                el.removeAttribute('aria-invalid');
+                const feedback = el.closest('.form-group')?.querySelector('.feedback-msg');
+                const describedBy = (el.getAttribute('aria-describedby') || '').split(/\s+/).filter(id => id && id !== feedback?.id);
+                if (describedBy.length) {
+                    el.setAttribute('aria-describedby', describedBy.join(' '));
+                } else {
+                    el.removeAttribute('aria-describedby');
+                }
             });
             form.querySelectorAll('.feedback-msg').forEach(el => el.textContent = '');
             ageHint.textContent = 'Idade: --';
+            ageHint.classList.remove('text-success');
             toast.info('Formulário limpo.');
         });
     }
@@ -876,8 +901,13 @@ function validateField(input, validatorFn) {
 function setFieldInvalid(input, message) {
     input.classList.remove('is-valid');
     input.classList.add('is-invalid');
+    input.setAttribute('aria-invalid', 'true');
     const feedback = input.closest('.form-group')?.querySelector('.feedback-msg');
     if (feedback) {
+        feedback.id ||= `error-${input.id}`;
+        const describedBy = new Set((input.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean));
+        describedBy.add(feedback.id);
+        input.setAttribute('aria-describedby', [...describedBy].join(' '));
         feedback.textContent = message;
         feedback.className = 'feedback-msg text-danger visible';
     }
@@ -886,8 +916,15 @@ function setFieldInvalid(input, message) {
 function setFieldValid(input) {
     input.classList.remove('is-invalid');
     input.classList.add('is-valid');
+    input.setAttribute('aria-invalid', 'false');
     const feedback = input.closest('.form-group')?.querySelector('.feedback-msg');
     if (feedback) {
+        const describedBy = (input.getAttribute('aria-describedby') || '').split(/\s+/).filter(id => id && id !== feedback.id);
+        if (describedBy.length) {
+            input.setAttribute('aria-describedby', describedBy.join(' '));
+        } else {
+            input.removeAttribute('aria-describedby');
+        }
         feedback.textContent = '';
         feedback.className = 'feedback-msg hidden';
     }

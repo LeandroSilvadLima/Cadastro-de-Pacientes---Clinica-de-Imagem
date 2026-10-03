@@ -40,8 +40,8 @@ export function renderDashboard() {
                     <span class="modality-name">${mod}</span>
                     <span class="modality-count"><strong>${count}</strong> (${percentage}%)</span>
                 </div>
-                <div class="progress-track" title="${mod}: ${count} exame(s)">
-                    <div class="progress-fill" style="width: ${percentage}%; background-color: ${color};"></div>
+                <div class="progress-track" role="progressbar" aria-label="${mod}: ${count} de ${stats.total} exames" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-fill" aria-hidden="true" style="width: ${percentage}%; background-color: ${color};"></div>
                 </div>
             </div>
         `;
@@ -50,12 +50,12 @@ export function renderDashboard() {
     const recentRowsHtml = stats.recentPatients.length > 0
         ? stats.recentPatients.map(p => `
             <tr>
-                <td>
+                <th scope="row">
                     <div class="patient-cell-name">
                         <strong>${escapeHTML(p.fullName)}</strong>
                         <span class="text-muted text-sm">CPF: ${p.cpf}</span>
                     </div>
-                </td>
+                </th>
                 <td>
                     <span class="badge badge-primary">${p.examType}</span>
                     <div class="text-xs text-muted mt-1">${escapeHTML(p.bodyPart || 'Geral')}</div>
@@ -143,7 +143,7 @@ export function renderDashboard() {
         <div class="grid-2-col mt-4">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Distribuição por Tipo de Exame</h3>
+                    <h2 class="card-title">Distribuição por Tipo de Exame</h2>
                     <span class="text-xs text-muted">Total: ${stats.total} exames</span>
                 </div>
                 <div class="card-body">
@@ -155,7 +155,7 @@ export function renderDashboard() {
 
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Ações e Gerenciamento</h3>
+                    <h2 class="card-title">Ações e Gerenciamento</h2>
                 </div>
                 <div class="card-body system-manage-box">
                     <p class="text-sm text-muted">
@@ -181,22 +181,24 @@ export function renderDashboard() {
         <div class="card mt-4">
             <div class="card-header flex-between">
                 <div>
-                    <h3 class="card-title">Últimos Pacientes Cadastrados</h3>
+                    <h2 class="card-title">Últimos Pacientes Cadastrados</h2>
                     <span class="text-xs text-muted">Acompanhe as triagens mais recentes da clínica</span>
                 </div>
                 <a href="#/pacientes" class="btn btn-sm btn-outline">Ver Lista Completa &rarr;</a>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
+                <div class="table-responsive" role="region" aria-label="Últimos pacientes cadastrados" tabindex="0">
                     <table class="data-table">
+                        <caption class="visually-hidden">Pacientes mais recentes, exames, convênios, datas e alertas</caption>
                         <thead>
                             <tr>
-                                <th>Paciente</th>
-                                <th>Exame / Região</th>
-                                <th>Convênio</th>
-                                <th>Data Agendada</th>
-                                <th>Triagem de Risco</th>
-                                <th class="text-right">Ações</th>
+                                <th scope="col">Paciente</th>
+                                <th scope="col">Exame / Região</th>
+                                <th scope="col">Convênio</th>
+                                <th scope="col">Data Agendada</th>
+                                <th scope="col">Triagem de Risco</th>
+                                <th scope="col" class="text-right">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
