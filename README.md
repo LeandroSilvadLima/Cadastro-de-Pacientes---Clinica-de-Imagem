@@ -138,22 +138,6 @@ npx serve .
 
 ---
 
-## Build de Produção e Deploy
-
-O projeto usa Vite para empacotar os módulos JavaScript e as folhas de estilo, minificar HTML/CSS/JavaScript e otimizar imagens raster e SVG incluídas na aplicação. Não há imagens locais no momento; imagens adicionadas ao projeto serão processadas durante a build.
-
-```bash
-npm ci
-npm run build
-npm run preview
-```
-
-Os arquivos prontos para publicação são gerados em `dist/`. O workflow `.github/workflows/pages.yml` executa a build e publica automaticamente no GitHub Pages quando há alterações em `main`. O endereço de produção é [https://leandrosilvadlima.github.io/Cadastro-de-Pacientes---Clinica-de-Imagem/](https://leandrosilvadlima.github.io/Cadastro-de-Pacientes---Clinica-de-Imagem/).
-
-O Vite usa o caminho-base do repositório no GitHub Actions e `/` no desenvolvimento local. A publicação requer que GitHub Pages esteja habilitado para usar GitHub Actions.
-
----
-
 ## 🧪 Roteiro de Testes Recomendado
 
 1. **Navegação SPA**: Clique nos links **Painel**, **Pacientes** e **Novo Cadastro** no cabeçalho e observe a transição instantânea sem recarregamento de página.
