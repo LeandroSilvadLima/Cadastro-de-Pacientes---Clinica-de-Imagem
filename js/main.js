@@ -4,6 +4,10 @@
 
 import { router } from './router.js';
 import { toast } from './utils/notifications.js';
+import '../css/variables.css';
+import '../css/base.css';
+import '../css/components.css';
+import '../css/views.css';
 
 document.addEventListener('DOMContentLoaded', () => {
     const appContainer = document.getElementById('app');
