@@ -58,6 +58,30 @@ A aplicação conta com navegação fluida sem recarregamento de página, sistem
 
 ---
 
+## Estratégia de Branching (GitFlow)
+
+- `main`: versões estáveis e prontas para entrega. Releases e hotfixes são integrados nesta branch.
+- `develop`: branch permanente de integração; novas funcionalidades partem daqui.
+- `feature/<nome>`: branch temporária criada a partir de `develop` e integrada de volta a `develop` após a conclusão.
+- `release/<versão>`: branch temporária criada a partir de `develop` para validações finais; é integrada em `main` e de volta em `develop`.
+- `hotfix/<nome>`: branch temporária criada a partir de `main` para correções urgentes; é integrada em `main` e em `develop`.
+
+Branches `feature/*`, `release/*` e `hotfix/*` são removidas após a integração. Elas são criadas quando há trabalho correspondente, não mantidas vazias apenas para ocupar espaço.
+
+Exemplo de ciclo de funcionalidade:
+
+```bash
+git switch develop
+git switch -c feature/busca-pacientes
+# implemente e faça commits da funcionalidade
+git switch develop
+git merge --no-ff feature/busca-pacientes
+git push origin develop
+git branch -d feature/busca-pacientes
+```
+
+---
+
 ## 📁 Estrutura Modular de Arquivos
 
 ```
