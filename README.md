@@ -1,5 +1,7 @@
 # ImagemRad - Sistema de Gestão e Cadastro de Pacientes (SPA)
 
+Página de Cadastro de Pacientes de uma Clinica de Imagem fictícia.
+
 > **Atividade Prática 3** &bull; Curso de Ciências da Computação &bull; Disciplina: Desenvolvimento Front-End
 
 ---
