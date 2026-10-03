@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de cadastro e gestão de pacientes de clínica de diagnóstico por imagem. Single Page Application dinâmica com validação em tempo real e persistência local.">
+    <meta name="theme-color" content="#0284c7">
+    <title>Clínica Imagem Diagnóstica | Gestão de Pacientes</title>
+
+    <!-- Fontes do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Folhas de Estilo Modulares -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/views.css">
+</head>
+<body>
+    <!-- Cabeçalho Principal e Navegação SPA -->
+    <header class="app-header">
+        <div class="header-inner">
+            <a href="#/dashboard" class="brand-container" id="brand-logo" aria-label="Ir para Painel Inicial">
+                <div class="brand-logo-icon" aria-hidden="true">🩻</div>
+                <div class="brand-text-block">
+                    <span class="brand-name">ImagemRad</span>
+                    <span class="brand-tagline">Diagnóstico por Imagem</span>
+                </div>
+            </a>
+
+            <!-- Botão Menu Mobile -->
+            <button class="menu-toggle" id="menu-toggle" aria-label="Alternar menu de navegação" aria-expanded="false">
+                ☰
+            </button>
+
+            <!-- Links de Navegação da SPA -->
+            <nav class="main-nav" id="main-nav" aria-label="Navegação Principal">
+                <a href="#/dashboard" class="nav-link" id="nav-dashboard">
+                    <span>📊</span>
+                    <span>Painel</span>
+                </a>
+                <a href="#/pacientes" class="nav-link" id="nav-pacientes">
+                    <span>👥</span>
+                    <span>Pacientes</span>
+                </a>
+                <a href="#/cadastro" class="nav-link" id="nav-cadastro">
+                    <span>✚</span>
+                    <span>Novo Cadastro</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Container Dinâmico da SPA -->
+    <main class="app-main" id="app" role="main" aria-live="polite">
+        <!-- O conteúdo das views (Dashboard, Cadastro, Lista) é injetado aqui via JavaScript -->
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="app-footer">
+        <div class="footer-inner">
+            <p>
+                <strong>ImagemRad Diagnósticos</strong> &copy; 2026 &bull; Atividade Prática 3 &bull; Desenvolvimento Front-End
+            </p>
+            <p class="text-xs text-muted">
+                Single Page Application (SPA) &bull; JavaScript Modular &bull; localStorage &bull; Validação de Formulários
+            </p>
+        </div>
+    </footer>
+
+    <!-- Script Principal da Aplicação (ES Modules) -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

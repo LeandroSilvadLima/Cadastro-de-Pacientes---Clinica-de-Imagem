@@ -1,0 +1,63 @@
+/**
+ * Design Tokens e Variáveis Globais de Estilização
+ * Clínica de Diagnóstico por Imagem
+ */
+
+:root {
+    /* Cores Principais - Tema Médico Sofisticado (Ciano / Azul Safira / Esmeralda) */
+    --primary: #0284c7;           /* Sky Blue 600 */
+    --primary-hover: #0369a1;     /* Sky Blue 700 */
+    --primary-light: #e0f2fe;     /* Sky Blue 100 */
+    --primary-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    --brand-teal: #0d9488;        /* Teal 600 */
+
+    /* Cores Neutras e Superfícies */
+    --bg-page: #f8fafc;           /* Slate 50 */
+    --bg-surface: #ffffff;
+    --bg-subtle: #f1f5f9;         /* Slate 100 */
+    --border-color: #e2e8f0;      /* Slate 200 */
+    --border-focus: #38bdf8;      /* Sky Blue 400 */
+
+    /* Tipografia e Textos */
+    --text-main: #0f172a;         /* Slate 900 */
+    --text-muted: #64748b;        /* Slate 500 */
+    --text-light: #94a3b8;        /* Slate 400 */
+    --text-inverse: #ffffff;
+
+    /* Cores Semânticas / Alertas Médicos */
+    --success: #10b981;           /* Emerald 500 */
+    --success-light: #d1fae5;
+    --success-text: #065f46;
+
+    --warning: #f59e0b;           /* Amber 500 */
+    --warning-light: #fef3c7;
+    --warning-text: #92400e;
+
+    --danger: #ef4444;            /* Red 500 */
+    --danger-light: #fee2e2;
+    --danger-text: #991b1b;
+
+    --info: #3b82f6;              /* Blue 500 */
+    --info-light: #dbeafe;
+    --info-text: #1e40af;
+
+    /* Sombras e Elevação */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+    --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+
+    /* Arredondamento */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+
+    /* Transições */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.25s ease;
+
+    /* Dimensões */
+    --header-height: 70px;
+    --container-max-width: 1240px;
+}
