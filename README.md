@@ -112,29 +112,31 @@ Atividade Pratica 3/
 
 ---
 
-## 🛠️ Como Executar a Aplicação
+## 🛠️ Desenvolvimento e Produção
 
-Por utilizar **ES Modules** nativos do JavaScript (`import`/`export`), os navegadores modernos exigem que o projeto seja servido via protocolo HTTP/HTTPS (e não diretamente como `file:///` por motivos de segurança CORS do navegador).
+Requisitos: Node.js 22.12 ou superior (ou 20.19 ou superior) e npm.
 
-Você pode utilizar qualquer uma das alternativas simples abaixo:
-
-### Opção 1: Via Extensão Live Server do VSCode (Recomendado)
-1. Abra a pasta do projeto no VSCode.
-2. Clique com o botão direito sobre o arquivo `index.html` e selecione **"Open with Live Server"**.
-3. O navegador abrirá automaticamente em `http://127.0.0.1:5500`.
-
-### Opção 2: Via Python (já instalado na máquina)
-Abra o terminal na pasta do projeto e execute:
 ```bash
-python -m http.server 3000
+npm ci
+npm run dev
 ```
-Em seguida, abra o navegador e acesse: [http://localhost:3000](http://localhost:3000)
 
-### Opção 3: Via Node.js (npx)
-No terminal na pasta do projeto:
+Para validar localmente a versão de produção:
+
 ```bash
-npx serve .
+npm run build
+npm run preview
 ```
+
+O build gera os arquivos estáticos em `dist/`: Vite agrupa e minifica JavaScript e CSS, o plugin `html-minifier-terser` minifica o HTML, e `vite-plugin-image-optimizer` otimiza imagens raster e SVG adicionadas ao projeto. Os bundles recebem nomes com hash para permitir cache eficiente; mapas de código-fonte ficam desativados em produção.
+
+### Deploy no GitHub Pages
+
+O workflow `.github/workflows/deploy.yml` publica automaticamente `dist/` no GitHub Pages quando há push para `main`, ou quando executado manualmente em **Actions**. Em **Settings > Pages**, selecione **GitHub Actions** como origem de publicação. O build configura o caminho correto para o repositório.
+
+Após a primeira execução bem-sucedida do workflow, a aplicação estará disponível em:
+
+https://leandrosilvadlima.github.io/Cadastro-de-Pacientes---Clinica-de-Imagem/
 
 ---
 
